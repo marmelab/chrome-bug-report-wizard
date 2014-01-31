@@ -7,7 +7,7 @@
     "options_page": "options.html",
     "permissions": ["activeTab"],
     "browser_action": {
-        "default_icon": "img/icon.png", // https://www.iconfinder.com/icons/82515/bug_icon#size=26
+        "default_icon": "img/icon.png",
         "default_popup": "bug-report.html"
     }
 }

@@ -34,3 +34,7 @@ Currently, configuration is really simple. Going into the extension options, you
 ## Licence
 
 This project is released under the MIT licence (thanks to [Marmelab](http://www.marmelab.com) courtesy). It means you can use it freely, even on your consumer workstations. You also can clone this project, as long as you keep the original licence file into your fork.
+
+## Special thanks
+
+A special thanks to [Icojam](http://www.icojam.com) for providing the extension icon (taken from the [Blueberry icon pack](https://www.iconfinder.com/iconsets/blueberry#readme)).
