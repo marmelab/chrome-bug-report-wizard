@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Chrome Bug reporter</title>
+    <link href="style.css" rel="stylesheet" />
 </head>
 <body>
+    <form action="//:0" method="POST" id="bug-form">
+        <fieldset>
+            <legend>Bug description</legend>
+            <p>
+                <label for="bug-title">Title:</label>
+                <input type="text" name="title" id="bug-title" />
+            </p>
+            <p>
+                <label for="bug-title">Description:</label>
+                <textarea name="description" id="bug-description" rows="6"></textarea>
+            </p>
+            <p class="actions">
+                <button type="submit">Send report</button>
+            </p>
+        </fieldset>
+    </form>
     <script src="js/bug-reporter.js"></script>
 </body>
 </html>

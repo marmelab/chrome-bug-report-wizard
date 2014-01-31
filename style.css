@@ -1,0 +1,29 @@
+body {
+    font-size: 12px;
+    background: #eee;
+    font-family: Arial;
+    color: #444;
+    width: 400px;
+}
+
+fieldset {
+    border: 1px solid silver;
+}
+
+label {
+    display: block;
+}
+
+input, textarea {
+    border: 1px solid silver;
+    margin-left: 0;
+    width: calc(100% - 10px);
+    color: #666;
+    background: #fff;
+    font-family: Arial;
+    padding: 2px;
+}
+
+.actions {
+    text-align: right;
+}
