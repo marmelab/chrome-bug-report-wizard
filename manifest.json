@@ -1,9 +1,12 @@
 {
     "manifest_version": 2,
 
-    "name": "Bug reporter",
-    "description": "This extension, currently in beta, allows to report easily a bug on main bug trackers with all required informations.",
-    "version": "0.1",
+    "name": "Chrome Bug Report Wizard",
+    "description": "Chrome plugin automating bug tracker issue creation with screenshot and browser details.",
+    "version": "0.5",
+
+    "author": "Jonathan Petitcolas <petitcolas.jonathan+cbrw@gmail.com",
+    "homepage_url": "https://github.com/marmelab/chrome-bug-report-wizard",
     "options_page": "options.html",
     "permissions": ["activeTab"],
     "browser_action": {
