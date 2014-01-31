@@ -11,11 +11,11 @@
             <legend>Bug description</legend>
             <p>
                 <label for="bug-title">Title:</label>
-                <input type="text" name="title" id="bug-title" />
+                <input type="text" name="title" id="bug-title" required="required" />
             </p>
             <p>
                 <label for="bug-title">Description:</label>
-                <textarea name="description" id="bug-description" rows="6"></textarea>
+                <textarea name="description" id="bug-description" rows="6" required="required"></textarea>
             </p>
             <p class="actions">
                 <button type="submit">Send report</button>
@@ -23,5 +23,6 @@
         </fieldset>
     </form>
     <script src="js/bug-reporter.js"></script>
+    <script src="js/form.js"></script>
 </body>
 </html>
