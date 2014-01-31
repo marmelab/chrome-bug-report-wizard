@@ -7,24 +7,21 @@ var PivotalTransporter;
     /**
      * @see https://www.pivotaltracker.com/help/api
      */
-    PivotalTransporter = function() {
-
-        var TOKEN = "";
-        var PROJECT_ID = 0;
+    PivotalTransporter = function(token, projectId) {
 
         this.createBug = function(bug, callback) {
             this._sendRequest("POST", {
                 name: bug.title,
-                description: bug.description
+                description: this._prepareBugDescription(bug),
             }, callback);
         };
 
         this._sendRequest = function(method, data, callback) {
             var xhr = new XMLHttpRequest();
-            var url = "https://www.pivotaltracker.com/services/v5/projects/" + PROJECT_ID + "/stories";
+            var url = "https://www.pivotaltracker.com/services/v5/projects/" + projectId + "/stories";
             xhr.open(method, url, true);
 
-            xhr.setRequestHeader("X-TrackerToken", TOKEN);
+            xhr.setRequestHeader("X-TrackerToken", token);
             xhr.setRequestHeader("Content-Type", "application/json");
 
             xhr.onerror = function(e) {
@@ -44,6 +41,25 @@ var PivotalTransporter;
 
             xhr.send(JSON.stringify(data));
         };
+
+        this._prepareBugDescription = function(bug) {
+            var description = "URL: " + bug.url + "\n\n";
+
+            if (bug.description) {
+                description += bug.description + "\n\n";
+            }
+
+            description += "---\nDetails:\n\n"
+            for (var detail in bug.details) {
+                if (!bug.details[detail]) {
+                    continue;
+                }
+
+                description += detail + ": " + bug.details[detail] + "\n";
+            }
+
+            return description;
+        }
     };
 
 })();
