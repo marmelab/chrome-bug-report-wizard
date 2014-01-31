@@ -5,7 +5,7 @@
     "description": "This extension, currently in beta, allows to report easily a bug on main bug trackers with all required informations.",
     "version": "0.1",
     "options_page": "options.html",
-    "permissions": ["tabs"],
+    "permissions": ["activeTab"],
     "browser_action": {
         "default_icon": "img/icon.png", // https://www.iconfinder.com/icons/82515/bug_icon#size=26
         "default_popup": "bug-report.html"

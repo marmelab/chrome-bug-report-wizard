@@ -13,12 +13,15 @@ var BugReporter = null;
             var me = this;
             var pivotalTracker = new PivotalTransporter(localStorage["pivotal-token"], localStorage["pivotal-project-id"]);
             this._getActiveTabUrl(function(url) {
-                pivotalTracker.createBug({
-                    title: me.title,
-                    description: me.description,
-                    url: url,
-                    details: me._gatherBrowserDetails()
-                }, callback);
+                me._getScreenshot(function(screenshot) {
+                    pivotalTracker.createBug({
+                        title: me.title,
+                        description: me.description,
+                        url: url,
+                        details: me._gatherBrowserDetails(),
+                        screenshot: screenshot
+                    }, callback);
+                });
             });
         };
 
@@ -45,6 +48,10 @@ var BugReporter = null;
             chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
                 callback(tabs[0].url);
             });
+        },
+
+        this._getScreenshot = function(callback) {
+            chrome.tabs.captureVisibleTab(callback);
         }
     };
 

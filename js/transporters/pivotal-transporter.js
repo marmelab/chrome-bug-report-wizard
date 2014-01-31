@@ -9,37 +9,60 @@ var PivotalTransporter;
      */
     PivotalTransporter = function(token, projectId) {
 
+        this.url = "https://www.pivotaltracker.com/services/v5/projects/" + projectId;
+
         this.createBug = function(bug, callback) {
-            this._sendRequest("POST", {
-                name: bug.title,
-                description: this._prepareBugDescription(bug),
-            }, callback);
+            var me = this;
+            $.when(this._uploadScreenshot(bug.screenshot), this._createStory(bug)).done(function(screenshot, story) {
+                me._attachScreenshot(screenshot[0], story[0]);
+            });
         };
 
-        this._sendRequest = function(method, data, callback) {
-            var xhr = new XMLHttpRequest();
-            var url = "https://www.pivotaltracker.com/services/v5/projects/" + projectId + "/stories";
-            xhr.open(method, url, true);
+        this._uploadScreenshot = function(screenshot) {
+            var formData = new FormData();
+            var pictureData = this._base64toBlob(screenshot.split(",")[1]);
+            formData.append("file", new Blob([pictureData], { type: "image/jpeg" }), "screenshot.jpg");
 
-            xhr.setRequestHeader("X-TrackerToken", token);
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onerror = function(e) {
-                // To prevent from CORS errors
-                callback("unknown error, check the console log");
-            };
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        callback();
-                    } else {
-                        callback(xhr.statusText);
-                    }
+            return $.ajax({
+                url: this.url + "/uploads",
+                type: "POST",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-TrackerToken', token);
                 }
-            };
+            });
+        };
 
-            xhr.send(JSON.stringify(data));
+        this._createStory = function(bug) {
+            return $.ajax({
+                url: this.url + "/stories",
+                type: "POST",
+                data: {
+                    name: bug.title,
+                    description: this._prepareBugDescription(bug)
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-TrackerToken', token);
+                }
+            });
+        };
+
+        this._attachScreenshot = function(screenshot, story) {
+            return $.ajax({
+                url: this.url + "/stories/" + story.id + "/comments",
+                type: "POST",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-TrackerToken', token);
+                },
+                processData: false,
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "file_attachments": [JSON.parse(screenshot)]
+                })
+            });
         };
 
         this._prepareBugDescription = function(bug) {
@@ -61,6 +84,31 @@ var PivotalTransporter;
             }
 
             return description;
+        };
+
+        /**
+         * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+         */
+        this._base64toBlob = function(base64Data, contentType) {
+            contentType = contentType || '';
+            var sliceSize = 1024;
+            var byteCharacters = atob(base64Data);
+            var bytesLength = byteCharacters.length;
+            var slicesCount = Math.ceil(bytesLength / sliceSize);
+            var byteArrays = new Array(slicesCount);
+
+            for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+                var begin = sliceIndex * sliceSize;
+                var end = Math.min(begin + sliceSize, bytesLength);
+
+                var bytes = new Array(end - begin);
+                for (var offset = begin, i = 0 ; offset < end; ++i, ++offset) {
+                    bytes[i] = byteCharacters[offset].charCodeAt(0);
+                }
+                byteArrays[sliceIndex] = new Uint8Array(bytes);
+            }
+
+            return new Blob(byteArrays, { type: contentType });
         }
     };
 
