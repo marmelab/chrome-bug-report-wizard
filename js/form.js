@@ -2,26 +2,29 @@
 
     "use strict";
 
-    var failure = document.getElementById("bug-failure");
-    var success = document.getElementById("bug-success");
+    var failure = $("#bug-failure");
+    var success = $("#bug-success");
 
-    document.getElementById("bug-form").addEventListener("submit", function(e) {
+    $("#bug-form").on("submit", function(e) {
         e.preventDefault();
 
         var form = this;
+        $("body").addClass("loading");
+
         var bugReporter = new BugReporter({
-            title: document.getElementById("bug-title").value,
-            description: document.getElementById("bug-description").value
+            title: $("#bug-title").val(),
+            description: $("#bug-description").val()
         });
 
         bugReporter.sendReport().then(function() {
-            failure.style.display = "none";
-            success.style.display = "none";
+            $("body").removeClass("loading");
+
+            $(failure).hide();
+            $(success).hide();
 
             form.reset();
 
-            success.innerHTML = "Your bug report has been added to Pivotal Tracker (in the icebox).";
-            success.style.display = "block";
+            $(success).text("Your bug report has been added to Pivotal Tracker (in the icebox).").show();
         }).done(function() {
             setTimeout(function() {
                 window.close();
