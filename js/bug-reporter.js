@@ -24,11 +24,11 @@ var BugReporter = null;
 
         this._gatherBrowserDetails = function() {
             var data = {
-                browser: navigator.appVersion,
-                language: navigator.language,
-                userAgent: navigator.userAgent,
-                cookieEnabled: navigator.cookieEnabled,
-                doNotTrack: navigator.doNotTrack
+                browser: { label: "Browser", value: navigator.appVersion },
+                language: { label: "Language", value: navigator.language },
+                userAgent: { label: "User-agent", value: navigator.userAgent },
+                cookieEnabled: { label: "Cookies enabled", value: navigator.cookieEnabled },
+                doNotTrack: { label: "Do not track", value: navigator.doNotTrack }
             };
 
             var installedPlugins = [];
@@ -36,7 +36,7 @@ var BugReporter = null;
                 installedPlugins.push(navigator.plugins[i].name);
             }
 
-            data["plugins"] = "\n    - " + installedPlugins.join("\n    - ");
+            data["plugins"] = { label: "Plug-ins", value: "\n    - " + installedPlugins.join("\n    - ") };
 
             return data;
         };

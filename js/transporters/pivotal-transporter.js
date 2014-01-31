@@ -43,19 +43,21 @@ var PivotalTransporter;
         };
 
         this._prepareBugDescription = function(bug) {
-            var description = "URL: " + bug.url + "\n\n";
+            var description = "*URL:* " + bug.url + "\n\n";
 
             if (bug.description) {
                 description += bug.description + "\n\n";
             }
 
-            description += "---\nDetails:\n\n"
-            for (var detail in bug.details) {
-                if (!bug.details[detail]) {
+            description += "---\n*Details:*\n\n"
+            for (var key in bug.details) {
+                var detail = bug.details[key];
+
+                if (!detail.value) {
                     continue;
                 }
 
-                description += detail + ": " + bug.details[detail] + "\n";
+                description += "*" + detail.label + ":* " + detail.value + "\n";
             }
 
             return description;
