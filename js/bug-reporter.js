@@ -9,18 +9,17 @@ var BugReporter = null;
         this.title = options.title || null;
         this.description = options.description || null;
 
-        this.sendReport = function(callback) {
+        this.sendReport = function() {
             var me = this;
             var pivotalTracker = new PivotalTransporter(localStorage["pivotal-token"], localStorage["pivotal-project-id"]);
-            this._getActiveTabUrl(function(url) {
-                me._getScreenshot(function(screenshot) {
-                    pivotalTracker.createBug({
-                        title: me.title,
-                        description: me.description,
-                        url: url,
-                        details: me._gatherBrowserDetails(),
-                        screenshot: screenshot
-                    }, callback);
+
+            return $.when(this._getActiveTabUrl(), this._getScreenshot()).then(function(url, screenshot) {
+                return pivotalTracker.createBug({
+                    title: me.title,
+                    description: me.description,
+                    url: url,
+                    details: me._gatherBrowserDetails(),
+                    screenshot: screenshot
                 });
             });
         };
@@ -44,14 +43,22 @@ var BugReporter = null;
             return data;
         };
 
-        this._getActiveTabUrl = function(callback) {
-            chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-                callback(tabs[0].url);
+        this._getActiveTabUrl = function() {
+            var deffered = $.Deferred();
+            chrome.tabs.query({'active': true}, function (tabs) {
+                deffered.resolve(tabs[0].url);
             });
+
+            return deffered.promise();
         },
 
         this._getScreenshot = function(callback) {
-            chrome.tabs.captureVisibleTab(callback);
+            var deffered = $.Deferred();
+            chrome.tabs.captureVisibleTab(function(screenshot) {
+                deffered.resolve(screenshot);
+            });
+
+            return deffered.promise();
         }
     };
 

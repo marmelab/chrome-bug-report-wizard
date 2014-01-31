@@ -11,10 +11,10 @@ var PivotalTransporter;
 
         this.url = "https://www.pivotaltracker.com/services/v5/projects/" + projectId;
 
-        this.createBug = function(bug, callback) {
+        this.createBug = function(bug) {
             var me = this;
-            $.when(this._uploadScreenshot(bug.screenshot), this._createStory(bug)).done(function(screenshot, story) {
-                me._attachScreenshot(screenshot[0], story[0]);
+            return $.when(this._uploadScreenshot(bug.screenshot), this._createStory(bug)).then(function(screenshot, story) {
+                return me._attachScreenshot(screenshot[0], story[0]);
             });
         };
 
