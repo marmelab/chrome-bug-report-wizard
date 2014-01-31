@@ -9,9 +9,12 @@ var BugReporter = null;
         this.title = options.title || null;
         this.description = options.description || null;
 
-        this.sendReport = function() {
-            console.log(this.title);
-            console.log(this.description);
+        this.sendReport = function(callback) {
+            var pivotalTracker = new PivotalTransporter();
+            pivotalTracker.createBug({
+                title: this.title,
+                description: this.description
+            }, callback);
         }
     };
 

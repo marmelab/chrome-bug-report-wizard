@@ -4,6 +4,7 @@ body {
     font-family: Arial;
     color: #444;
     width: 400px;
+    overflow: hidden;
 }
 
 fieldset {
@@ -26,4 +27,28 @@ input, textarea {
 
 .actions {
     text-align: right;
+}
+
+.status-message {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.success {
+    display: none;
+    color: #4a4;
+    border: 1px solid #afa;
+    background: #cfc;
+}
+
+.failure {
+    display: none;
+    color: #a44;
+    border: 1px solid #faa;
+    background: #fcc;
 }
