@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bug reporter - Settings</title>
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            width: 500px;
+            margin: auto;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bug reporter settings</h1>
+    <form method="POST" action="//:0" id="settings-form">
+        <p>
+            <label for="pivotal-token">Pivotal token:</label>
+            <input type="text" id="pivotal-token" name="pivotal-token" required="required" />
+        </p>
+        <p>
+            <label for="pivotal-project-id">Pivotal project ID:</label>
+            <input type="text" id="pivotal-project-id" name="pivotal-project-id" required="required" />
+        </p>
+        <p class="actions">
+            <button type="submit">Save</button>
+        </p>
+    </form>
+    <script src="js/options.js"></script>
+</body>
+</html>
