@@ -20,11 +20,8 @@
             $("body").removeClass("loading");
 
             $(failure).hide();
-            $(success).hide();
-
-            form.reset();
-
-            $(success).text("Your bug report has been added to Pivotal Tracker (in the icebox).").show();
+            $(form).hide();
+            $(success).show();
         }).done(function() {
             setTimeout(function() {
                 window.close();
