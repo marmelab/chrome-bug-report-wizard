@@ -1,58 +1,3 @@
-body {
-    font-size: 12px;
-    background: #eee;
-    font-family: Arial;
-    color: #444;
-    width: 400px;
-    overflow: hidden;
-}
-
-fieldset {
-    border: 1px solid silver;
-}
-
-label {
-    display: block;
-}
-
-input, textarea {
-    border: 1px solid silver;
-    margin-left: 0;
-    width: calc(100% - 10px);
-    color: #666;
-    background: #fff;
-    font-family: Arial;
-    padding: 2px;
-}
-
-.actions {
-    text-align: right;
-}
-
-.status-message {
-    position: absolute;
-    left: 0;
-    top: 40%;
-    height: 20px;
-    line-height: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.success {
-    display: none;
-    color: #4a4;
-    border: 1px solid #afa;
-    background: #cfc;
-}
-
-.failure {
-    display: none;
-    color: #a44;
-    border: 1px solid #faa;
-    background: #fcc;
-}
-
 #loader {
     height:60px;
     width:60px;
@@ -88,8 +33,8 @@ input, textarea {
 }
 
 @keyframes rotation {
-from {transform: rotate(0deg);}
-to {transform: rotate(359deg);}
+    from {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
 }
 
 .loading .loading-layer {

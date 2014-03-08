@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Chrome Bug reporter</title>
-    <link href="style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/forms.css" rel="stylesheet" />
+    <link href="css/loader.css" rel="stylesheet" />
 </head>
-<body>
+<body style="width: 500px;">
+
     <div class="loading-layer">
         <div id="loader"></div>
     </div>
 
-    <form action="//:0" method="POST" id="bug-form">
-        <fieldset>
-            <legend>Bug description</legend>
-            <p>
-                <label for="bug-title">Title:</label>
-                <input type="text" name="title" id="bug-title" required="required" />
-            </p>
-            <p>
-                <label for="bug-title">Description:</label>
-                <textarea name="description" id="bug-description" rows="6"></textarea>
-            </p>
-            <p class="actions">
-                <button type="submit">Send report</button>
-            </p>
-        </fieldset>
-    </form>
+    <p id="bug-success" class="success status-message">Your bug report has been successfully sent!</p>
+    <p id="bug-failure" class="failure status-message">An error occured while sending bug report... :(</p>
 
-    <p id="bug-success" class="success status-message"></p>
-    <p id="bug-failure" class="failure status-message"></p>
+    <form action="//:0" method="POST" id="bug-form">
+        <p>
+            <label for="bug-title">Title:</label>
+            <input type="text" name="title" id="bug-title" required="required" />
+        </p>
+        <p>
+            <label for="bug-title">Description:</label>
+            <textarea name="description" id="bug-description" rows="6"></textarea>
+        </p>
+        <p class="actions">
+            <button type="submit">Send report</button>
+        </p>
+    </form>
 
     <script src="js/jquery-2.1.0.min.js"></script>
     <script src="js/transporters/pivotal-transporter.js"></script>
