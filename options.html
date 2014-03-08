@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Bug reporter - Settings</title>
-    <link href="style.css" rel="stylesheet" />
-    <style>
-        body {
-            width: 500px;
-            margin: auto;
-            background: #fff;
-        }
-    </style>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/options.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Bug reporter settings</h1>
+    <h1>
+        <img src="img/icon.png" alt="Chrome Bug Report Wizard" title="Chrome Bug Report Wizard" />
+        Chrome Bug Report Wizard
+    </h1>
     <form method="POST" action="//:0" id="settings-form">
         <p>
             <label for="pivotal-token">Pivotal token:</label>
             <input type="text" id="pivotal-token" name="pivotal-token" required="required" />
+            <span class="helper">You can retrieve it on your <a href="#">Pivotal profile page</a>.</span>
         </p>
         <p>
             <label for="pivotal-project-id">Pivotal project ID:</label>
             <input type="text" id="pivotal-project-id" name="pivotal-project-id" required="required" />
+            <span class="helper">
+                This is the number present in your URL project page. For instance:
+                <a href="#">https://www.pivotaltracker.com/s/projects/<strong>123456</strong></a>.
+            </span>
         </p>
         <p class="actions">
             <button type="submit">Save</button>
