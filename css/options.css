@@ -1,6 +1,10 @@
 body {
-    width: 500px;
+    width: 700px;
     margin: auto;
     background: #fff;
 }
 
+h1 img {
+    position: relative;
+    top: 7px;
+}
