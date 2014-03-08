@@ -4,15 +4,6 @@ form p {
 
 input, textarea {
     margin: 0;
-}
-
-label {
-    display: inline-block;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-
-input {
     display: block;
     width: 100%;
     padding: 6px 12px;
@@ -24,12 +15,19 @@ input {
     border-radius: 4px;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    font-family: inherit;
 }
 
-input:focus {
+input:focus, textarea:focus {
     border-color: #66afe9;
     outline: 0;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .helper {
