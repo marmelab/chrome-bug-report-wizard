@@ -31,9 +31,9 @@ Currently, configuration is really simple. Going into the extension options, you
 * **Pivotal API token:** you can find it on your Pivotal Tracker profile,
 * **Pivotal project id:** available in your project URL (for instance, https://www.pivotaltracker.com/s/projects/**1005528**)
 
-## Licence
+## License
 
-This project is released under the MIT licence (thanks to [Marmelab](http://www.marmelab.com) courtesy). It means you can use it freely, even on your consumer workstations. You also can clone this project, as long as you keep the original licence file into your fork.
+This project is released under the MIT license (thanks to [Marmelab](http://www.marmelab.com) courtesy). It means you can use it freely, even on your consumer workstations. You also can clone this project, as long as you keep the original license file into your fork.
 
 ## Special thanks
 
