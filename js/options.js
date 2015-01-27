@@ -3,6 +3,7 @@
     "use strict";
 
     var parameters = ["pivotal-token", "pivotal-project-id"];
+    var success = document.getElementById('success');
 
     document.getElementById("settings-form").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -11,6 +12,8 @@
             var parameterName = parameters[i];
             localStorage[parameterName] = document.getElementById(parameterName).value;
         }
+
+        success.style.display = 'block';
     });
 
     document.addEventListener("DOMContentLoaded", function() {
